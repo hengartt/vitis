@@ -1,0 +1,12 @@
+# Ignorar el entorno virtual de Python
+/venv
+# No agregar las imagenes que están en data/train y data/val
+/data/train
+/data/val
+# No guardar la cache de PyTorch
+__pycache__
+# Ignorar archivos de configuración de PyTorch
+.config
+.env
+# Ignorar archivos de salida de entrenamiento
+/runs
