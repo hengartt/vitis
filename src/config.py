@@ -12,12 +12,13 @@ VAL_DATA_PATH = 'data/val'
 
 # Parámetros del modelo
 MODEL_NAME = 'vit_base_patch16_224'
-NUM_CLASSES = 1 # Para clasificación wood_disease y sana
+NUM_CLASSES = 1 # 1 = para clasificación wood_disease y sana
 
 # Hiperparámetros de entrenamiento
 BATCH_SIZE = 4
-NUM_EPOCHS = 20
-LEARNING_RATE = 3e-5
+NUM_EPOCHS = 5
+NUM_WORKERS = 4
+LEARNING_RATE = 1e-5
 WEIGHT_DECAY = 1e-4
 
 # Parámetros de salida

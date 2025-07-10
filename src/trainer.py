@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 from .utils import plot_training_results
 from .utils import plot_confusion_matrix
 from .utils import plot_normalized_confusion_matrix
+from .utils import visualize_and_save_batch
 
 
 class Trainer:
@@ -79,13 +80,15 @@ class Trainer:
                 best_val_acc = val_acc
                 torch.save(self.model.state_dict(), best_model_path)
                 print(f"[INFO] Nuevo mejor modelo guardado.")
+
+            visualize_and_save_batch(self.train_loader, self.train_loader.dataset.classes, os.path.join(self.results_dir, f'batch_visualization_epoch_{epoch+1}.png'))
         
         print("[OK] Entrenamiento finalizado.")
         # Llamada a las funciones de reporte final de utils.py
         plot_training_results(log_file_path, os.path.join(self.results_dir, 'training_results.png'))
 
         # Evaluación final en el conjunto de validación
-        val_loader = DataLoader(self.val_loader.dataset, batch_size=config.BATCH_SIZE, shuffle=False, num_workers=4, pin_memory=True)
+        val_loader = DataLoader(self.val_loader.dataset, batch_size=config.BATCH_SIZE, shuffle=False, num_workers=config.NUM_WORKERS, pin_memory=True)
         self.model.load_state_dict(torch.load(best_model_path))
         y_pred, y_true = [], []
         self.model.eval()
